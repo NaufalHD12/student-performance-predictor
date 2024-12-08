@@ -18,7 +18,7 @@ Addressing academic performance issues is crucial because:
 - OECD Report on Education (2021) highlights that socio-economic and behavioral factors play significant roles in academic performance.  
 Link: https://www.oecd.org/en/publications/2021/09/education-at-a-glance-2021_dd45f55e.html
 
-- The regression study explored how Socio-economic predicted academic outcomes while adjusting for other factors like family engagement and school resources.
+- The regression study explored how Socio-economic predicted academic outcomes while adjusting for other factors like family engagement and school resources.  
 Link: https://doi.org/10.54183/jssr.v3i2.308
 
 ## Business Understanding
