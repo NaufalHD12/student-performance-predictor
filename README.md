@@ -48,40 +48,40 @@ The UCI Student Performance dataset includes information on students from two su
 - Number of Columns: 33 (including the target G3).
 
 Link to dataset: https://archive.ics.uci.edu/dataset/320/student+performance
-### Target Variable
-- G3 (Final Grade): Numeric (0–20), the continuous output variable to predict.
-### Input Features
-- Demographics:  
-    - sex: Student’s gender (binary: F/M).
-    - age: Student’s age (numeric).
-    - address: Home address type (urban/rural).
-    - famsize: Family size (≤3/>3).
-    - Pstatus: Parent’s cohabitation status (together/apart).
-
-- Parental Factors:  
-    - Medu: Mother’s education (0–4).
-    - Fedu: Father’s education (0–4).
-    - Mjob: Mother’s job (nominal).
-    - Fjob: Father’s job (nominal).
-
-- Study Behavior:  
-    - studytime: Weekly study time (1–4).
-    - traveltime: Home-to-school travel time (1–4).
-    - failures: Number of past class failures (0–4).
-    - schoolsup: Extra educational support (binary: yes/no).
-    - paid: Extra paid classes (binary: yes/no).
-
-- Social and Behavioral Factors:  
-    - activities: Participation in extracurricular activities (yes/no).
-    - romantic: Romantic relationship (yes/no).
-    - freetime: Free time after school (1–5).
-    - goout: Frequency of going out with friends (1–5).
-    - Dalc: Workday alcohol consumption (1–5).
-    - Walc: Weekend alcohol consumption (1–5).
-
-- Other Features:  
-    - absences: Number of school absences (0–93).
-    - health: Current health status (1–5).
+### Features
+1. school - student's school (binary: 'GP' - Gabriel Pereira or 'MS' - Mousinho da Silveira)  
+2. sex - student's sex (binary: 'F' - female or 'M' - male)  
+3. age - student's age (numeric: from 15 to 22)  
+4. address - student's home address type (binary: 'U' - urban or 'R' - rural)  
+5. famsize - family size (binary: 'LE3' - less or equal to 3 or 'GT3' - greater than 3)  
+6. Pstatus - parent's cohabitation status (binary: 'T' - living together or 'A' - apart)  
+7. Medu - mother's education (numeric: 0 - none,  1 - primary education (4th grade), 2 â€“ 5th to 9th grade, 3 â€“ secondary education or 4 â€“ higher education)  
+8. Fedu - father's education (numeric: 0 - none,  1 - primary education (4th grade), 2 â€“ 5th to 9th grade, 3 â€“ secondary education or 4 â€“ higher education)  
+9. Mjob - mother's job (nominal: 'teacher', 'health' care related, civil 'services' (e.g. administrative or police), 'at_home' or 'other')  
+10. Fjob - father's job (nominal: 'teacher', 'health' care related, civil 'services' (e.g. administrative or police), 'at_home' or 'other')  
+11. reason - reason to choose this school (nominal: close to 'home', school 'reputation', 'course' preference or 'other')  
+12. guardian - student's guardian (nominal: 'mother', 'father' or 'other')  
+13. traveltime - home to school travel time (numeric: 1 - <15 min., 2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - >1 hour)  
+14. studytime - weekly study time (numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours)  
+15. failures - number of past class failures (numeric: n if 1<=n<3, else 4)  
+16. schoolsup - extra educational support (binary: yes or no)  
+17. famsup - family educational support (binary: yes or no)  
+18. paid - extra paid classes within the course subject (Math or Portuguese) (binary: yes or no)  
+19. activities - extra-curricular activities (binary: yes or no)  
+20. nursery - attended nursery school (binary: yes or no)  
+21. higher - wants to take higher education (binary: yes or no)  
+22. internet - Internet access at home (binary: yes or no)  
+23. romantic - with a romantic relationship (binary: yes or no)  
+24. famrel - quality of family relationships (numeric: from 1 - very bad to 5 - excellent)  
+25. freetime - free time after school (numeric: from 1 - very low to 5 - very high)  
+26. goout - going out with friends (numeric: from 1 - very low to 5 - very high)  
+27. Dalc - workday alcohol consumption (numeric: from 1 - very low to 5 - very high)  
+28. Walc - weekend alcohol consumption (numeric: from 1 - very low to 5 - very high)  
+29. health - current health status (numeric: from 1 - very bad to 5 - very good)  
+30. absences - number of school absences (numeric: from 0 to 93)  
+31. G1 - first period grade (numeric: from 0 to 20)  
+32. G2 - second period grade (numeric: from 0 to 20)  
+33. G3 - final grade (numeric: from 0 to 20, **output target**)
 ### Exploratory Data Analysis
 - Loading Data from ucimlrepo
 - Perform initial inspection to find out general information (**info()**) and descriptive statistics(**describe()**) on the dataset. 
@@ -175,6 +175,7 @@ Initialized a DataFrame with rows representing evaluation metrics (MSE, MAE, R²
 ### Linear Regression
 - **Objective**: Use a simple regression model as a baseline.
 - **Approach**:
+    - **Working Mechanism**: Linear Regression assumes a linear relationship between independent variables (features) and the dependent variable (target). It minimizes the sum of squared residuals (differences between observed and predicted values) to find the best-fit line.
     - Trained the LinearRegression model using sklearn.
     - Predicted on the training set and calculated the following metrics:
         - Mean Squared Error (MSE): Measures average squared error.
@@ -184,34 +185,53 @@ Initialized a DataFrame with rows representing evaluation metrics (MSE, MAE, R²
 ### K-Nearest Neighbors (KNN) Regression
 - **Objective**: Explore a non-parametric method based on proximity between data points.
 - **Approach**:
-    - Used GridSearchCV to tune the hyperparameters:
-        - n_neighbors: Number of neighbors.
-        - weights: Weighting function.
+    - **Working Mechanism**: KNN Regression predicts the target for a given data point by averaging the targets of its n_neighbors closest points. The closeness is measured using a distance metric (e.g., Euclidean distance).
+    - **Hyperparameters Tuned via GridSearchCV**:
+        - The **param_grid** defines a systematic range of hyperparameters to test. For KNN, n_neighbors (number of neighbors) and weights (uniform or distance-based) significantly influence the model's ability to generalize. This ensures that the model's performance is thoroughly explored within a controlled range of options.
+        - **n_neighbors**: Number of neighbors to consider. I use [3, 5, 7, 9, 11].
+            - Effect: A smaller n_neighbors (e.g., 2) makes predictions more sensitive to local variations, which may lead to overfitting. A larger value (e.g., 15) smooths predictions but risks underfitting.
+        - **weights**: Weighting function (uniform or distance).
+            - Effect: uniform gives all neighbors equal importance, while distance assigns greater weight to closer neighbors, improving predictions in datasets where proximity correlates strongly with the target variable.
     - Evaluated the best model on training data using the same metrics as Linear Regression.
 ### Random Forest Regression
 - **Objective**: Use a robust ensemble model that handles non-linear relationships.
 - **Approach**:
-    - Used GridSearchCV for hyperparameter tuning:
-        - n_estimators: Number of trees.
-        - max_depth: Maximum depth of the tree.
-        - min_samples_split: Minimum samples for a split.
-    - Fitted the best model and calculated metrics on training data.
+    - **Working Mechanism**: Random Forest builds multiple decision trees during training and averages their predictions to improve accuracy and control overfitting.
+    - **Hyperparameters Tuned via GridSearchCV**:
+        - Using the **param_grid** tuning setup for the Random Forest Regressor ensures optimal performance by systematically exploring a range of key parameters that significantly impact the model's ability to generalize
+        - **n_estimators**: Number of trees in the forest (e.g., 100, 200, 300).
+            - Effect: Increasing n_estimators improves accuracy by reducing variance, but it increases training time. Diminishing returns are observed after a certain point.
+        - **max_depth**: Maximum depth of each tree (e.g., None, 10, 20).
+            - Effect: A deeper tree can capture more complex patterns but risks overfitting. Shallower trees reduce overfitting but may miss important patterns.
+        - **min_samples_split**: Minimum number of samples required to split a node (e.g., 2, 5, 10).
+            - Effect: Larger values prevent the model from creating overly complex trees, reducing overfitting at the cost of potentially higher bias.
+    - Evaluated the best model using the same metrics as other models.
 ### XGBoost Regression
 - **Objective**: Train a gradient-boosted decision tree model for better performance on structured data.
 - **Approach**:
-    - Used GridSearchCV for hyperparameter tuning:
-        - n_estimators: Number of boosting rounds.
-        - learning_rate: Step size shrinkage.
-        - max_depth: Maximum depth of a tree.
-    - Evaluated the best model on training data.
+    - **Working Mechanism**: XGBoost trains sequential trees, where each subsequent tree reduces the errors of the previous ones. It uses regularization techniques to prevent overfitting.
+    - **Hyperparameters Tuned via GridSearchCV**:
+        - Using the **param_grid** for the XGBoost Regressor ensures that the model is fine-tuned for optimal performance by systematically exploring key parameters that influence its ability to capture complex relationships and avoid overfitting.
+        - **n_estimators**: Number of boosting rounds (e.g., 100, 200, 300).
+            - Effect: Increasing n_estimators allows the model to learn more from the data, improving accuracy but increasing the risk of overfitting and training time.
+        - **learning_rate**: Shrinkage step size (e.g., 0.01, 0.1, 0.3).
+            - Effect: A smaller learning_rate makes the model learn slowly, requiring more boosting rounds for convergence, while a larger value speeds up learning but risks overshooting the optimal solution.
+        - **max_depth**: Maximum depth of a tree (e.g., 3, 5, 7).
+            - Effect: Deeper trees improve the model's ability to capture complex patterns but increase overfitting risk and training time. Shallower trees may underfit.
+    - Evaluated the best model using the same metrics as other models.
 ### CatBoost Regression
 - **Objective**: Train a gradient-boosting model optimized for categorical features and high-speed performance.
 - **Approach**:
-    - Used GridSearchCV for hyperparameter tuning:
-        - iterations: Number of boosting rounds.
-        - learning_rate: Step size shrinkage.
-        - depth: Depth of the tree.
-    - Calculated metrics for the best model.
+    - **Working Mechanism**: CatBoost improves on gradient boosting by processing categorical features efficiently. It also reduces prediction bias using ordered boosting.
+    - **Hyperparameters Tuned via GridSearchCV**:
+        - Use the **param_grid** tuning setup for the CatBoost Regressor is beneficial because it allows you to find the optimal configuration of key hyperparameters that influence model performance, efficiency, and the ability to handle categorical features
+        - **iterations**: Number of boosting rounds (e.g., 100, 200, 300).
+            - Effect: Increasing iterations enhances accuracy but lengthens training time. Too many iterations may cause overfitting.
+        - **learning_rate**: Step size shrinkage (e.g., 0.01, 0.1, 0.3).
+            Effect: A smaller learning_rate ensures better convergence by taking smaller steps but requires more boosting rounds. A larger value speeds up convergence at the risk of overshooting.
+        - **depth**: Depth of the trees (e.g., 4, 6, 8).
+            - Effect: Larger depths allow the model to capture complex patterns but increase overfitting risks, while smaller depths may lead to underfitting.
+    - Evaluated the best model using the same metrics as other models.
 
 ## Evaluation
 ###  Metrics that I use:  
@@ -239,13 +259,32 @@ By combining these metrics:
 - Avoid relying on a single metric, which might not reflect all aspects of the model’s performance.
 ### Result
 #### **Model Comparison MSE**  
-![Model Comparison Test MSE](./Image%20Visualization/Model%20Comparison%20Test%20MSE.png)
+![Model Comparison Test MSE](./Image%20Visualization/Model%20Comparison%20Test%20MSE.png)  
+- CatBoost has relatively balanced performance between training and testing sets.
+- Linear Regression has a relatively higher MSE on train set compared to other models
+- Random Forest performs moderately with a small training MSE but higher test MSE.
+- KNN has very high test MSE, which may indicate overfitting or poor generalization.
+- XGBoost has the lowest train MSE but a considerable gap with test MSE, indicating possible overfitting.
 #### **Model Comparison MAE**  
-![Model Comparison Test MAE](./Image%20Visualization/Model%20Comparison%20Test%20MAE.png)
+![Model Comparison Test MAE](./Image%20Visualization/Model%20Comparison%20Test%20MAE.png)  
+- CatBoost shows good balance with lower MAE in both training and testing datasets.
+- Random Forest has moderate train and test MAE, showing slightly better generalization than other models.
+- Linear Regression maintains consistent but relatively high MAE for both datasets, suggesting underfitting.
+- XGBoost has the smallest train MAE but a notable gap to test MAE, indicating overfitting.
+- KNN displays the highest test MAE, suggesting overfitting or poor performance on unseen data.
 #### **Model Comparison R² Score**  
-![Model Comparison Test R2 Score](./Image%20Visualization/Model%20Comparison%20Test%20R2%20Score.png)
+![Model Comparison Test R2 Score](./Image%20Visualization/Model%20Comparison%20Test%20R2%20Score.png)  
+- XGBoost demonstrates strong performance with high train and test R², though the train R² is slightly higher, indicating minor overfitting.
+- KNN shows relatively balanced train and test R² but at a lower overall score, suggesting limited model capacity for this problem.
+- Random Forest performs well with a small gap between train and test R², suggesting good generalization.
+- Linear Regression maintains consistent but lower R² scores for both datasets, indicative of underfitting.
+- CatBoost achieves high train and test R² scores, showcasing strong and consistent performance.
 #### **Model Comparison RMSE**
-![Model Comparison Test RMSE](./Image%20Visualization/Model%20Comparison%20Test%20RMSE.png)
+![Model Comparison Test RMSE](./Image%20Visualization/Model%20Comparison%20Test%20RMSE.png)  
+- CatBoost performs well with a low Test RMSE, suggesting it generalizes well to new data.
+- Random Forest shows a higher Test RMSE, which could indicate some overfitting since the training RMSE is much lower.
+- Linear Regression has a relatively higher RMSE compared to other models, implying less effective performance on this dataset.
+- XGBoost and KNN also show higher Test RMSE compared to CatBoost, with KNN potentially struggling with generalization.
 
 ### Prediction Testing
 This table presents a comparison of actual target values (y_true) against predictions made by various regression models on a sample of test data. The predictions are rounded to one decimal place for better readability.
