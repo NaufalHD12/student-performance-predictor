@@ -53,6 +53,8 @@
 # - Number of Columns: 33 (including the target G3).
 # 
 # Link to dataset: https://archive.ics.uci.edu/dataset/320/student+performance
+# ### Data Condition
+# The UCI Student Performance dataset is clean, with no missing values or outliers, as confirmed by the dataset's documentation on the UCI website. All features are well-defined, and their ranges are appropriate for the context of the data. For example, numeric features like age, absences, and grades fall within logical and expected ranges, while categorical features such as school, sex, and address contain only valid predefined categories. This ensures that the dataset is ready for analysis and modeling without requiring additional steps like imputing missing data or handling anomalies.
 # ### Features
 # 1. school - student's school (binary: 'GP' - Gabriel Pereira or 'MS' - Mousinho da Silveira)  
 # 2. sex - student's sex (binary: 'F' - female or 'M' - male)  
@@ -152,9 +154,6 @@ print(df.describe())
 print("Missing Values:")
 print(df.isnull().sum())
 
-
-# ### Data Condition
-# The UCI Student Performance dataset is clean, with no missing values or outliers, as confirmed by the dataset's documentation on the UCI website. All features are well-defined, and their ranges are appropriate for the context of the data. For example, numeric features like age, absences, and grades fall within logical and expected ranges, while categorical features such as school, sex, and address contain only valid predefined categories. This ensures that the dataset is ready for analysis and modeling without requiring additional preprocessing steps like imputing missing data or handling anomalies.
 
 # ### Univariate Analysis
 

@@ -18,7 +18,7 @@ Addressing academic performance issues is crucial because:
 - OECD Report on Education (2021) highlights that socio-economic and behavioral factors play significant roles in academic performance.  
 Link: https://www.oecd.org/en/publications/2021/09/education-at-a-glance-2021_dd45f55e.html
 
-- The regression study explored how Socio-economic predicted academic outcomes while adjusting for other factors like family engagement and school resources.  
+- The regression study explored how Socio-economic predicted academic outcomes while adjusting for other factors like family engagement and school resources.
 Link: https://doi.org/10.54183/jssr.v3i2.308
 
 ## Business Understanding
@@ -48,6 +48,9 @@ The UCI Student Performance dataset includes information on students from two su
 - Number of Columns: 33 (including the target G3).
 
 Link to dataset: https://archive.ics.uci.edu/dataset/320/student+performance
+
+### Data Condition
+The UCI Student Performance dataset is clean, with no missing values or outliers, as confirmed by the dataset's documentation on the UCI website. All features are well-defined, and their ranges are appropriate for the context of the data. For example, numeric features like age, absences, and grades fall within logical and expected ranges, while categorical features such as school, sex, and address contain only valid predefined categories. This ensures that the dataset is ready for analysis and modeling without requiring additional steps like imputing missing data or handling anomalies.
 ### Features
 1. school - student's school (binary: 'GP' - Gabriel Pereira or 'MS' - Mousinho da Silveira)  
 2. sex - student's sex (binary: 'F' - female or 'M' - male)  
