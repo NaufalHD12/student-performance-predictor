@@ -308,7 +308,7 @@ This table presents a comparison of actual target values (y_true) against predic
     - High R2 score, indicating it explains a larger proportion of the variance in the new data.
 - This suggests **CatBoost** offers a good balance between training and testing performance, generalizing well to unseen data without overfitting.
 
-## Closing Statement
+## Closing
 In this project, I successfully built a machine learning pipeline to predict student academic performance using the UCI Student Performance Dataset. By combining exploratory data analysis, feature engineering, and rigorous modeling techniques, I evaluated multiple regression algorithms, including Linear Regression, KNN, Random Forest, XGBoost, and CatBoost.
 
 Among the tested models, CatBoost demonstrated superior performance, achieving the lowest error metrics (MSE, MAE, RMSE) and the highest R² score. This indicates that CatBoost effectively captures complex relationships in the data while generalizing well to unseen samples.
