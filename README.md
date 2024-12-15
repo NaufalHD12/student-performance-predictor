@@ -1,4 +1,4 @@
-# Machine Learning Project Report - Naufal Hadi Darmawan
+# Machine Learning Project Report - Naufal Hadi Darmawan ([GitHub](https://github.com/NaufalHD12))
 # Student Performance Predictor
 
 ## Project Domain
