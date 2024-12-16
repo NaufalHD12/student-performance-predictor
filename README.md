@@ -305,7 +305,7 @@ This table presents a comparison of actual target values (y_true) against predic
 ### Final Decision Model
 - Based on the analysis, **CatBoost** emerged as the most suitable model. It consistently achieved:
     - Low error on the testing set across all metrics (MSE, MAE, RMSE)
-    - High R2 score, indicating it explains a larger proportion of the variance in the new data.
+    - High R2 score 85% on the testing set, indicating it explains a larger proportion of the variance in the new data.
 - This suggests **CatBoost** offers a good balance between training and testing performance, generalizing well to unseen data without overfitting.
 
 ## Closing
